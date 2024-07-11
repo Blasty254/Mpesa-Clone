@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "49160994700",
+    "project_id": "tollo-on-flutter",
+    "storage_bucket": "tollo-on-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49160994700:android:79609939c12297387160a9",
+        "android_client_info": {
+          "package_name": "com.example.tollo_on_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJFG3XOf1aNttkLjEFxB3uhmr9wH5tGaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
