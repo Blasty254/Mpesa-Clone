@@ -1,6 +1,9 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tollo_on_flutter/Authenticate/loginScreen.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
 
@@ -20,7 +23,7 @@ class splashscreenState extends ConsumerState<splashscreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 7),
       vsync: this,
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller)
@@ -36,16 +39,46 @@ class splashscreenState extends ConsumerState<splashscreen>
   }
 
   void checkAuthentication() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    if (auth.currentUser != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
+    var connectivityResult = await Connectivity().checkConnectivity();
+
+    if (connectivityResult == ConnectivityResult.none) {
+      showCustomAlertDialog(context);
     } else {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+      FirebaseAuth auth = FirebaseAuth.instance;
+      if (auth.currentUser != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
+      }
     }
+  }
+
+  void showCustomAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Lottie.asset('assets/lottie/no_internet_connection.json',
+                  width: 150, height: 150), // Adjust path as needed
+              Text("No Internet Connection"),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(), // Dismiss the dialog
+                child: Text('Dismiss'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -57,25 +90,19 @@ class splashscreenState extends ConsumerState<splashscreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.redAccent,
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FadeTransition(
-                opacity: _animation,
-                child: Image.asset(
-                  'assets/images/tollopay.png',
-                  width: 150,
-                  height: 150,
-                ),
-              )
-            ],
-          ),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: FadeTransition(
+              opacity: _animation,
+              child: Container(
+                child: Lottie.asset('assets/lottie/animationseven.json',
+                    fit: BoxFit.contain),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

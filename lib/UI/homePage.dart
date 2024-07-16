@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tollo_on_flutter/Providers/transactionsProvider.dart';
 import 'package:tollo_on_flutter/shared/RoundedIconWidget.dart';
 import 'package:tollo_on_flutter/shared/adsContainers.dart';
@@ -18,6 +19,7 @@ class HomePage extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(slivers: <Widget>[
         SliverAppBar(
+          pinned: true,
           floating: true,
           snap: true,
           title: Row(
@@ -97,8 +99,10 @@ class HomePage extends ConsumerWidget {
                             Theme.of(context).colorScheme.secondary,
                             FontWeight.bold),
                       ),
-                      Icon(
-                        Icons.remove_red_eye_outlined,
+                      const SizedBox(width: 10),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.remove_red_eye_outlined),
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ],
@@ -215,8 +219,65 @@ class HomePage extends ConsumerWidget {
             ),
           ),
         SliverToBoxAdapter(
-          child: HorizontalScrollingImages(),
-        )
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: AdsContainerWithIndicator(),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: 170,
+            margin: EdgeInsets.all(10),
+            child: Card(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Financial Services',
+                          style: appstyle(
+                              14,
+                              Theme.of(context).colorScheme.secondary,
+                              FontWeight.normal),
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text('View All',
+                                style: appstyle(
+                                    14, Colors.green, FontWeight.w400))),
+                      ],
+                    ),
+                  ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RoundIconTextWidget(
+                          imagePath: 'assets/icons/moneybag.png', text: 'Mali'),
+                      RoundIconTextWidget(
+                          lottiePath: 'assets/lottie/animationchecklist.json',
+                          text: 'M-pesa Go'),
+                      RoundIconTextWidget(
+                          imagePath: 'assets/icons/moneybag.png',
+                          text: 'M-Shwari'),
+                      RoundIconTextWidget(
+                          lottiePath: 'assets/lottie/animationfour.json',
+                          text: 'KCB\nMpesa'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+            child: Container(
+          child: Lottie.asset('assets/lottie/animationthree.json',
+              animate: true, height: 150, width: 150),
+        ))
       ]),
     );
   }
