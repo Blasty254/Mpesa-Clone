@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tollo_on_flutter/Providers/connectivityStreamProvider.dart';
-import 'package:tollo_on_flutter/SplashActivity/Splashscreen.dart';
+import 'package:tollo_on_flutter/UI/Navigation/app_router.dart';
 import 'package:tollo_on_flutter/theme/theme.dart';
 
 void main() async {
@@ -26,27 +26,31 @@ class MyApp extends ConsumerWidget {
           final message = data == ConnectivityResult.none
               ? "No internet connection"
               : "You are back online";
+          print("Connectivity Status: $message");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(message),
-              duration: Duration(seconds: 25),
+              duration: const Duration(seconds: 25),
             ),
           );
         },
-        error: (e, _) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Error Checking connectivity: $e"),
-          ),
-        ),
-        loading: () => {},
+        error: (e, _) {
+          print("Error Checking connectivity: $e"); // Print to debug console
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Error Checking connectivity: $e"),
+            ),
+          );
+        },
+        loading: () => {print("Checking connectivity...")},
       );
     });
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'Mpesa Clone',
       theme: lightMode,
       darkTheme: darkMode,
-      home: const splashscreen(),
     );
   }
 }

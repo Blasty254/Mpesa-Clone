@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -147,7 +148,9 @@ class HomePage extends ConsumerWidget {
                       fontWeight: FontWeight.normal,
                     ))),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/statements');
+                    },
                     child: Text('SEE ALL',
                         style: appstyle(12, Colors.green, FontWeight.normal))),
               ],

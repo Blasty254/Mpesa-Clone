@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tollo_on_flutter/Authenticate/loginScreen.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
@@ -40,19 +41,18 @@ class splashscreenState extends ConsumerState<splashscreen>
 
   void checkAuthentication() async {
     var connectivityResult = await Connectivity().checkConnectivity();
+    print(connectivityResult);
 
     if (connectivityResult == ConnectivityResult.none) {
       showCustomAlertDialog(context);
+      print('Lost connection');
     } else {
       FirebaseAuth auth = FirebaseAuth.instance;
       if (auth.currentUser != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
+        context.push('/homepage');
+        print("navigating to homepage");
       } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()));
+        context.push('/login');
       }
     }
   }
