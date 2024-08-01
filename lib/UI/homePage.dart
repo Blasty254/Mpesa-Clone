@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tollo_on_flutter/Providers/transactionsProvider.dart';
+import 'package:tollo_on_flutter/UI/Bottomsheets/sendMoneyBottomsheet.dart';
 import 'package:tollo_on_flutter/shared/RoundedIconWidget.dart';
 import 'package:tollo_on_flutter/shared/adsContainers.dart';
 import 'package:tollo_on_flutter/shared/appstyle.dart';
@@ -114,18 +115,30 @@ class HomePage extends ConsumerWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RoundIconTextWidget(
-                    imagePath: 'assets/icons/banknote.png',
-                    text: 'Send \nMoney'),
+                  imagePath: 'assets/icons/banknote.png',
+                  text: 'Send \nMoney',
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const SendmoneyBottomsheet(),
+                    );
+                  },
+                ),
                 RoundIconTextWidget(
-                    imagePath: 'assets/icons/cash.png', text: 'Pay'),
+                  imagePath: 'assets/icons/cash.png',
+                  text: 'Pay',
+                  onTap: () {
+                    context.go('/homepage');
+                  },
+                ),
                 RoundIconTextWidget(
                     imagePath: 'assets/icons/money.png', text: 'Withdraw'),
                 RoundIconTextWidget(
@@ -230,7 +243,7 @@ class HomePage extends ConsumerWidget {
         SliverToBoxAdapter(
           child: Container(
             height: 170,
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: Card(
               child: Column(
                 children: [

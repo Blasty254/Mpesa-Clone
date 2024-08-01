@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class RoundIconTextWidget extends StatelessWidget {
+class RoundIconHorizontalTextWidget extends StatelessWidget {
   final String? imagePath;
   final String? lottiePath;
   final String text;
   final VoidCallback? onTap;
 
-  const RoundIconTextWidget({
+  const RoundIconHorizontalTextWidget({
     super.key,
     this.imagePath,
     this.lottiePath,
@@ -18,15 +18,15 @@ class RoundIconTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         if (imagePath != null) // If imagePath is provided, display the image
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: 35.0, // Specify your desired size
-              height: 35.0, // Specify your desired size
+              width: 45.0, // Specify your desired size
+              height: 45.0, // Specify your desired size
               decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -39,23 +39,23 @@ class RoundIconTextWidget extends StatelessWidget {
           )
         else if (lottiePath !=
             null) // If lottiePath is provided, display the Lottie animation
-          GestureDetector(
-            onTap: onTap,
-            child: ClipOval(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary),
-                child: Lottie.asset(
-                  lottiePath!,
-                  width: 35.0, // Specify your desired size
-                  height: 35.0, // Specify your desired size
-                  fit: BoxFit.fill,
-                ),
+          ClipOval(
+            child: Container(
+              decoration:
+                  BoxDecoration(color: Theme.of(context).colorScheme.secondary),
+              child: Lottie.asset(
+                lottiePath!,
+                width: 35.0, // Specify your desired size
+                height: 35.0, // Specify your desired size
+                fit: BoxFit.fill,
               ),
             ),
           ),
-        SizedBox(height: 8), // Space between icon and text.
-        Text(text),
+        SizedBox(width: 15), // Space between icon and text.
+        Text(
+          text,
+          style: const TextStyle(fontSize: 20),
+        ),
       ],
     );
   }
