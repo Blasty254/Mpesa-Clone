@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tollo_on_flutter/Providers/auth_provider.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
@@ -32,7 +33,7 @@ class LoginScreen extends ConsumerWidget {
                       style: appstyle(25, Colors.black, FontWeight.bold)),
                 )),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Welcome to the Tollo app',
                     style: appstyle(15, Colors.black, FontWeight.bold),
@@ -54,7 +55,7 @@ class LoginScreen extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                         showCursor: true,
                         decoration: const InputDecoration(
                           labelText: 'Email',
@@ -79,7 +80,7 @@ class LoginScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 20,
@@ -95,7 +96,7 @@ class LoginScreen extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             labelText: 'password',
@@ -135,10 +136,10 @@ class LoginScreen extends ConsumerWidget {
                           bool loginSuccessful =
                               await AuthNotifier.login(_email, _password);
                           if (loginSuccessful) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
+                            context.go('/homepage');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Login failed')));
                           }
                         }
                       },
@@ -168,6 +169,39 @@ class LoginScreen extends ConsumerWidget {
                               appstyle(10, Colors.blueAccent, FontWeight.w400),
                         )),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                          side: const BorderSide(width: 1.0),
+                          backgroundColor: Colors.white,
+                          minimumSize: Size(double.infinity, 50)),
+                      onPressed: () async {
+                        bool loginSuccessful =
+                            await AuthNotifier.signInWithGoogle();
+                        print('Login Successful : $loginSuccessful');
+                        if (loginSuccessful) {
+                          context.go('/homepage');
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            height: 35,
+                            width: 35,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                                'assets/images/android_light_rd_na@4x.png'),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          Text('Continue with google'),
+                          const Expanded(child: SizedBox()),
+                        ],
+                      )),
                 ),
               ],
             ),

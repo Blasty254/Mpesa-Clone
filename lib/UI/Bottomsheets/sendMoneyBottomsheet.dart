@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tollo_on_flutter/shared/RoundedIconHorizontal.dart';
 import 'package:tollo_on_flutter/shared/appstyle.dart';
 
@@ -37,7 +38,7 @@ class SendmoneyBottomsheet extends StatelessWidget {
               height: 10,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Text(
                 'Send and Request',
                 style: appstyle(24, Theme.of(context).colorScheme.primary,
@@ -47,7 +48,9 @@ class SendmoneyBottomsheet extends StatelessWidget {
             RoundIconHorizontalTextWidget(
               imagePath: 'assets/icons/banknote.png',
               text: 'Send Money',
-              onTap: () {},
+              onTap: () {
+                context.go('/SelectContact');
+              },
             ),
             RoundIconHorizontalTextWidget(
               imagePath: 'assets/icons/banknote.png',

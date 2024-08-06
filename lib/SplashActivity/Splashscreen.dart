@@ -1,12 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tollo_on_flutter/Authenticate/loginScreen.dart';
-import 'package:tollo_on_flutter/UI/homePage.dart';
 
 class splashscreen extends ConsumerStatefulWidget {
   const splashscreen({super.key});

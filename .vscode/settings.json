@@ -1,3 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "workbench.preferredDarkColorTheme": "Tokyo Night"
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>49160994700-4812jorr8u5s7l0qmld98s86h4t2mh7j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.49160994700-4812jorr8u5s7l0qmld98s86h4t2mh7j</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>49160994700-f1m8o8btj0fvcd60sl293vl6du6rquve.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyChOtlr2cpv1uerN1On82EnoT8RCxQmXQI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>49160994700</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.tolloOnFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>tollo-on-flutter</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tollo-on-flutter.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:49160994700:ios:9e19fe9b131d8a5d7160a9</string>
+	<key>DATABASE_URL</key>
+	<string>https://tollo-on-flutter-default-rtdb.firebaseio.com</string>
+
+	<key>CFBundleURLTypes</key>
+  	<array>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.googleusercontent.apps.49160994700-4812jorr8u5s7l0qmld98s86h4t2mh7j</string>
+      </array>
+    </dict>
+  </array>
+  <key>FirebaseAppDelegateProxyEnabled</key>
+  <false/>
+
+</dict>
+</plist>
