@@ -50,7 +50,7 @@ final GoRouter router = GoRouter(
   ],
   redirect: (BuildContext context, GoRouterState state) {
     final container = ProviderScope.containerOf(context);
-    final user = container.read(authNotifierProvider);
+    final user = container.read(routerNotifierProvider);
     final isLoggedIn = user != null;
     final isLoggingIn = state.uri.toString() == '/login';
     final isSplashScreen = state.uri.toString() == '/splashscreen';
