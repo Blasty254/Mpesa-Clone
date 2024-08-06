@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tollo_on_flutter/Providers/auth_provider.dart';
 import 'package:tollo_on_flutter/Providers/transactionsProvider.dart';
 import 'package:tollo_on_flutter/UI/Bottomsheets/sendMoneyBottomsheet.dart';
+import 'package:tollo_on_flutter/UI/Navigation/app_router.dart';
 import 'package:tollo_on_flutter/shared/RoundedIconWidget.dart';
 import 'package:tollo_on_flutter/shared/adsContainers.dart';
 import 'package:tollo_on_flutter/shared/appstyle.dart';
@@ -15,6 +17,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authNotifier = ref.watch(authNotifierProvider.notifier);
+    final user = ref.watch(routerNotifierProvider);
+
     final transactions = ref.watch(transactionsProvider);
     final transaction = transactions.isNotEmpty ? transactions.first : null;
     return Scaffold(
@@ -27,8 +32,11 @@ class HomePage extends ConsumerWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/tollopay.png'),
+              CircleAvatar(
+                backgroundImage: authNotifier.userPhotoUrl != null
+                    ? NetworkImage(authNotifier.userPhotoUrl!)
+                    : const AssetImage('assets/images/tollopay.png')
+                        as ImageProvider,
               ),
               const SizedBox(
                 width: 10,
@@ -45,7 +53,7 @@ class HomePage extends ConsumerWidget {
                     height: 5,
                   ),
                   Text(
-                    'Jeff',
+                    authNotifier.userFirstName ?? 'User',
                     style: appstyle(15, Theme.of(context).colorScheme.secondary,
                         FontWeight.w400),
                   ),

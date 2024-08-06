@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tollo_on_flutter/shared/appstyle.dart';
 
 class SelectContact extends ConsumerWidget {
@@ -17,7 +18,9 @@ class SelectContact extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go('/homepage');
+                      },
                       icon: Icon(
                         Icons.arrow_back_ios_new,
                         color: Theme.of(context).colorScheme.primary,

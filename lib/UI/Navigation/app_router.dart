@@ -9,7 +9,8 @@ import 'package:tollo_on_flutter/UI/SendMoney/selectContact.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
 import 'package:tollo_on_flutter/UI/statements.dart';
 
-final authNotifierProvider = StateNotifierProvider<AuthNotifier, User?>((ref) {
+final routerNotifierProvider =
+    StateNotifierProvider<AuthNotifier, User?>((ref) {
   return AuthNotifier(FirebaseAuth.instance);
 });
 

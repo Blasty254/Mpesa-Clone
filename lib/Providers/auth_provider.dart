@@ -13,6 +13,17 @@ class AuthNotifier extends StateNotifier<User?> {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  String? get userDisplayName => state?.displayName;
+  String? get userPhotoUrl => state?.photoURL;
+
+  String? get userFirstName {
+    final fullName = userDisplayName;
+    if (fullName != null && fullName.isNotEmpty) {
+      return fullName.split(' ').first;
+    }
+    return null;
+  }
+
   AuthNotifier(this._auth) : super(null) {
     _initializeUser();
   }
@@ -57,6 +68,7 @@ class AuthNotifier extends StateNotifier<User?> {
       return true;
     } catch (e) {
       print(e);
+      print("Error signing in with Google : $e");
       return false;
     }
   }
