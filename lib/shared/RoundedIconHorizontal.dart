@@ -39,19 +39,22 @@ class RoundIconHorizontalTextWidget extends StatelessWidget {
           )
         else if (lottiePath !=
             null) // If lottiePath is provided, display the Lottie animation
-          ClipOval(
-            child: Container(
-              decoration:
-                  BoxDecoration(color: Theme.of(context).colorScheme.secondary),
-              child: Lottie.asset(
-                lottiePath!,
-                width: 35.0, // Specify your desired size
-                height: 35.0, // Specify your desired size
-                fit: BoxFit.fill,
+          GestureDetector(
+            onTap: onTap,
+            child: ClipOval(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary),
+                child: Lottie.asset(
+                  lottiePath!,
+                  width: 35.0, // Specify your desired size
+                  height: 35.0, // Specify your desired size
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
-        SizedBox(width: 15), // Space between icon and text.
+        const SizedBox(width: 15), // Space between icon and text.
         Text(
           text,
           style: const TextStyle(fontSize: 20),

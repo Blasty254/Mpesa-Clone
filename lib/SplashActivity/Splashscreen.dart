@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tollo_on_flutter/Providers/auth_provider.dart';
 
 class splashscreen extends ConsumerStatefulWidget {
   const splashscreen({super.key});
@@ -20,6 +21,7 @@ class splashscreenState extends ConsumerState<splashscreen>
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: const Duration(seconds: 7),
       vsync: this,
@@ -34,6 +36,16 @@ class splashscreenState extends ConsumerState<splashscreen>
         }
       });
     _controller.forward();
+
+    // Check auth state and navigate
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authNotifier = ref.read(authNotifierProvider.notifier);
+      if (authNotifier.isLoggedIn) {
+        context.go('/homepage');
+      } else {
+        context.go('/login');
+      }
+    });
   }
 
   void checkAuthentication() async {
@@ -64,12 +76,12 @@ class splashscreenState extends ConsumerState<splashscreen>
             children: <Widget>[
               Lottie.asset('assets/lottie/no_internet_connection.json',
                   width: 150, height: 150), // Adjust path as needed
-              Text("No Internet Connection"),
-              SizedBox(height: 20),
+              const Text("No Internet Connection"),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () =>
                     Navigator.of(context).pop(), // Dismiss the dialog
-                child: Text('Dismiss'),
+                child: const Text('Dismiss'),
               ),
             ],
           ),

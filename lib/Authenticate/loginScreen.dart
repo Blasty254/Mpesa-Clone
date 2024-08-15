@@ -11,16 +11,16 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AuthNotifier = ref.watch(authNotifierProvider.notifier);
-    final _formKey = GlobalKey<FormState>();
-    String _email = '';
-    String _password = '';
+    final formKey = GlobalKey<FormState>();
+    String email = '';
+    String password = '';
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -72,7 +72,7 @@ class LoginScreen extends ConsumerWidget {
                           return null;
                         },
                         onSaved: (value) {
-                          _email = value!;
+                          email = value!;
                         },
                       ),
                     ),
@@ -112,7 +112,7 @@ class LoginScreen extends ConsumerWidget {
                           return null;
                         },
                         onSaved: (value) {
-                          _password = value!;
+                          password = value!;
                         },
                       ),
                     ),
@@ -129,10 +129,10 @@ class LoginScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),
                       onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
                           bool loginSuccessful =
-                              await AuthNotifier.login(_email, _password);
+                              await AuthNotifier.login(email, password);
                           if (loginSuccessful) {
                             context.go('/homepage');
                           } else {
@@ -174,7 +174,7 @@ class LoginScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                           side: const BorderSide(width: 1.0),
                           backgroundColor: Colors.white,
-                          minimumSize: Size(double.infinity, 50)),
+                          minimumSize: const Size(double.infinity, 50)),
                       onPressed: () async {
                         bool loginSuccessful =
                             await AuthNotifier.signInWithGoogle();
@@ -196,7 +196,7 @@ class LoginScreen extends ConsumerWidget {
                                 'assets/images/android_light_rd_na@4x.png'),
                           ),
                           const Expanded(child: SizedBox()),
-                          Text('Continue with google'),
+                          const Text('Continue with google'),
                           const Expanded(child: SizedBox()),
                         ],
                       )),

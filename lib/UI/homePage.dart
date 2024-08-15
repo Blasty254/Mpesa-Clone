@@ -18,12 +18,17 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authNotifier = ref.watch(authNotifierProvider.notifier);
-    final user = ref.watch(routerNotifierProvider);
+    // final user = ref.watch(routerNotifierProvider);
 
     final transactions = ref.watch(transactionsProvider);
     final transaction = transactions.isNotEmpty ? transactions.first : null;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      authNotifier.refreshUser();
+    });
+
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(slivers: <Widget>[
         SliverAppBar(
           pinned: true,
@@ -32,11 +37,16 @@ class HomePage extends ConsumerWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(
-                backgroundImage: authNotifier.userPhotoUrl != null
-                    ? NetworkImage(authNotifier.userPhotoUrl!)
-                    : const AssetImage('assets/images/tollopay.png')
-                        as ImageProvider,
+              Consumer(
+                builder: (context, ref, _) {
+                  final authNotifier = ref.watch(authNotifierProvider.notifier);
+                  return CircleAvatar(
+                    backgroundImage: authNotifier.userPhotoUrl != null
+                        ? NetworkImage(authNotifier.userPhotoUrl!)
+                        : const AssetImage('assets/images/tollopay.png')
+                            as ImageProvider,
+                  );
+                },
               ),
               const SizedBox(
                 width: 10,
@@ -52,10 +62,18 @@ class HomePage extends ConsumerWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    authNotifier.userFirstName ?? 'User',
-                    style: appstyle(15, Theme.of(context).colorScheme.secondary,
-                        FontWeight.w400),
+                  Consumer(
+                    builder: (context, ref, _) {
+                      final authNotifier =
+                          ref.watch(authNotifierProvider.notifier);
+                      return Text(
+                        authNotifier.userFirstName ?? 'User',
+                        style: appstyle(
+                            15,
+                            Theme.of(context).colorScheme.secondary,
+                            FontWeight.w400),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -147,7 +165,7 @@ class HomePage extends ConsumerWidget {
                     context.go('/homepage');
                   },
                 ),
-                RoundIconTextWidget(
+                const RoundIconTextWidget(
                     imagePath: 'assets/icons/money.png', text: 'Withdraw'),
                 RoundIconTextWidget(
                     imagePath: 'assets/icons/sendmoney.png', text: 'Airtime'),

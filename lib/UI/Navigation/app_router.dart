@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tollo_on_flutter/Authenticate/loginScreen.dart';
 import 'package:tollo_on_flutter/Providers/auth_provider.dart';
 import 'package:tollo_on_flutter/SplashActivity/Splashscreen.dart';
+import 'package:tollo_on_flutter/UI/SendMoney/EnterPhoneNumber.dart';
 import 'package:tollo_on_flutter/UI/SendMoney/selectContact.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
 import 'package:tollo_on_flutter/UI/statements.dart';
@@ -45,6 +46,12 @@ final GoRouter router = GoRouter(
       path: '/SelectContact',
       builder: (BuildContext context, GoRouterState state) {
         return const SelectContact();
+      },
+    ),
+    GoRoute(
+      path: '/EnterPhoneNumber',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Enterphonenumber();
       },
     ),
   ],

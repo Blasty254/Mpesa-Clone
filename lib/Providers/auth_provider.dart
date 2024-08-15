@@ -13,6 +13,8 @@ class AuthNotifier extends StateNotifier<User?> {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  bool get isLoggedIn => state != null;
+
   String? get userDisplayName => state?.displayName;
   String? get userPhotoUrl => state?.photoURL;
 
@@ -32,6 +34,12 @@ class AuthNotifier extends StateNotifier<User?> {
     _auth.authStateChanges().listen((User? user) {
       state = user;
     });
+  }
+
+  Future<void> refreshUser() async {
+    state = _auth.currentUser;
+    await state?.reload();
+    state = _auth.currentUser;
   }
 
   Future<bool> login(String email, String password) async {

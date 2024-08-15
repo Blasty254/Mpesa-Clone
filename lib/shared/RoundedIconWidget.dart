@@ -54,7 +54,7 @@ class RoundIconTextWidget extends StatelessWidget {
               ),
             ),
           ),
-        SizedBox(height: 8), // Space between icon and text.
+        const SizedBox(height: 8), // Space between icon and text.
         Text(text),
       ],
     );

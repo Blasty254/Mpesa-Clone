@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AdsContainerWithIndicator extends StatefulWidget {
+  const AdsContainerWithIndicator({super.key});
+
   @override
   _AdsContainerWithIndicatorState createState() =>
       _AdsContainerWithIndicatorState();
@@ -20,7 +22,7 @@ class _AdsContainerWithIndicatorState extends State<AdsContainerWithIndicator> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 180,
           child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
@@ -41,7 +43,7 @@ class _AdsContainerWithIndicatorState extends State<AdsContainerWithIndicator> {
                 return Container(
                   width: 350,
                   height: double.maxFinite,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     image: DecorationImage(
@@ -71,7 +73,7 @@ class _AdsContainerWithIndicatorState extends State<AdsContainerWithIndicator> {
     return Container(
       width: 8,
       height: 8,
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isActive ? Colors.blue : Colors.grey,

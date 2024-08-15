@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class LoginMethodButton extends StatelessWidget {
   final IconData icon;
@@ -22,7 +21,7 @@ class LoginMethodButton extends StatelessWidget {
           shape: BoxShape.circle,
           color: color,
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Icon(
           icon,
           color: Colors.white,
