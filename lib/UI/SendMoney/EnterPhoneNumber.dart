@@ -52,7 +52,7 @@ class Enterphonenumber extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 200,
                       child: TextFormField(
                         style: appstyle(

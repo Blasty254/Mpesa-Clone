@@ -37,16 +37,22 @@ class HomePage extends ConsumerWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Consumer(
-                builder: (context, ref, _) {
-                  final authNotifier = ref.watch(authNotifierProvider.notifier);
-                  return CircleAvatar(
-                    backgroundImage: authNotifier.userPhotoUrl != null
-                        ? NetworkImage(authNotifier.userPhotoUrl!)
-                        : const AssetImage('assets/images/tollopay.png')
-                            as ImageProvider,
-                  );
+              GestureDetector(
+                onTap: () {
+                  context.go('/SettingsPage');
                 },
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    final authNotifier =
+                        ref.watch(authNotifierProvider.notifier);
+                    return CircleAvatar(
+                      backgroundImage: authNotifier.userPhotoUrl != null
+                          ? NetworkImage(authNotifier.userPhotoUrl!)
+                          : const AssetImage('assets/images/tollopay.png')
+                              as ImageProvider,
+                    );
+                  },
+                ),
               ),
               const SizedBox(
                 width: 10,
@@ -167,7 +173,7 @@ class HomePage extends ConsumerWidget {
                 ),
                 const RoundIconTextWidget(
                     imagePath: 'assets/icons/money.png', text: 'Withdraw'),
-                RoundIconTextWidget(
+                const RoundIconTextWidget(
                     imagePath: 'assets/icons/sendmoney.png', text: 'Airtime'),
               ],
             ),
@@ -260,9 +266,9 @@ class HomePage extends ConsumerWidget {
               ),
             ),
           ),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: 20),
             child: AdsContainerWithIndicator(),
           ),
         ),

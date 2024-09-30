@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tollo_on_flutter/Providers/Theme_Provider.dart';
 import 'package:tollo_on_flutter/Providers/connectivityStreamProvider.dart';
 import 'package:tollo_on_flutter/UI/Navigation/app_router.dart';
 import 'package:tollo_on_flutter/theme/theme.dart';
@@ -23,6 +24,8 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     //listen to internet connectivity changes in realtime
     ref.listen<AsyncValue<ConnectivityResult>>(connectivityStreamProvider,
         (_, state) {

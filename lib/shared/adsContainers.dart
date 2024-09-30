@@ -41,7 +41,7 @@ class _AdsContainerWithIndicatorState extends State<AdsContainerWithIndicator> {
               itemCount: imageUrls.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: 350,
+                  width: 425,
                   height: double.maxFinite,
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(

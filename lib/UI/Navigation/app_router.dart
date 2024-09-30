@@ -8,6 +8,7 @@ import 'package:tollo_on_flutter/SplashActivity/Splashscreen.dart';
 import 'package:tollo_on_flutter/UI/SendMoney/EnterPhoneNumber.dart';
 import 'package:tollo_on_flutter/UI/SendMoney/selectContact.dart';
 import 'package:tollo_on_flutter/UI/homePage.dart';
+import 'package:tollo_on_flutter/UI/settings/settingsPage.dart';
 import 'package:tollo_on_flutter/UI/statements.dart';
 
 final routerNotifierProvider =
@@ -52,6 +53,12 @@ final GoRouter router = GoRouter(
       path: '/EnterPhoneNumber',
       builder: (BuildContext context, GoRouterState state) {
         return const Enterphonenumber();
+      },
+    ),
+    GoRoute(
+      path: '/SettingsPage',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SettingsPage();
       },
     ),
   ],

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -17,6 +20,38 @@ class AuthNotifier extends StateNotifier<User?> {
 
   String? get userDisplayName => state?.displayName;
   String? get userPhotoUrl => state?.photoURL;
+
+  Future<String?> uploadProfileImage(File image) async {
+    try {
+      // Create a reference to the location where the image will be stored in Firebase Storage
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('profile_images/${state?.uid}.jpg'); // Using UID to store unique images per user
+
+      // Upload the image to Firebase Storage
+      await storageRef.putFile(image);
+
+      // Get the download URL after the upload is complete
+      return await storageRef.getDownloadURL();
+    } catch (e) {
+      print("Error uploading image: $e");
+      return null;
+    }
+  }
+
+  // Update the user profile photo URL by first uploading the image
+  void updateUserPhotoUrl(File image) async {
+    if (state != null) {
+      // Upload the image to Firebase Storage and get the download URL
+      final String? downloadUrl = await uploadProfileImage(image);
+
+      if (downloadUrl != null) {
+        // Update the Firebase User profile with the new photo URL
+        await state?.updatePhotoURL(downloadUrl);
+        await refreshUser(); // Refresh user data to reflect changes
+      }
+    }
+  }
 
   String? get userFirstName {
     final fullName = userDisplayName;

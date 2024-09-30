@@ -137,7 +137,17 @@ class LoginScreen extends ConsumerWidget {
                             context.go('/homepage');
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Login failed')));
+                                const SnackBar(content: Row(
+                                  children: [
+                                    Icon(Icons.cancel_outlined, color: Colors.black,),
+                                    SizedBox(width: 15,),
+                                    Text('Login failed , Wrong password or email'),
+                                    SizedBox(width: 15,),
+                                  ],
+                                ),
+                                  backgroundColor: Colors.red,
+                                )
+                            );
                           }
                         }
                       },
