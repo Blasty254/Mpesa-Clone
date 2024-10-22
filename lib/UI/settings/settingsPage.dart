@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -46,7 +45,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final authNotifier = ref.watch(authNotifierProvider.notifier);
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -115,7 +113,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   'Settings',
                   style: appstyle(15, Theme.of(context).colorScheme.secondary, FontWeight.bold),
                 ),
+                
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+
+                child: RoundIconHorizontalTextWidget(text: 'Log Out',imagePath: 'assets/icons/user_signout.png',
+                  onTap: () async{
+                  await  authNotifier.logout();
+                  context.go('/login');
+                }
+                ,),
+              )
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tollo_on_flutter/shared/appstyle.dart';
@@ -8,6 +9,8 @@ class Enterphonenumber extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController  phonecontroller = TextEditingController();
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -55,6 +58,7 @@ class Enterphonenumber extends ConsumerWidget {
                     SizedBox(
                       width: 200,
                       child: TextFormField(
+                        controller: phonecontroller,
                         style: appstyle(
                             15,
                             Theme.of(context).colorScheme.secondary,
@@ -67,6 +71,9 @@ class Enterphonenumber extends ConsumerWidget {
                           border: UnderlineInputBorder(),
                         ),
                         keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
                     ),
                   ],
@@ -75,13 +82,18 @@ class Enterphonenumber extends ConsumerWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.green.shade400),
-                      onPressed: () {},
-                      child: const Row(
+                        side: BorderSide.none,
+                          backgroundColor: Colors.green),
+                      onPressed: () {
+                        context.go('/EnterAmount');
+                      },
+                      child: Row(
                         children: [
-                          Expanded(child: SizedBox()),
-                          Text('Continue'),
-                          Expanded(child: SizedBox()),
+                          const Expanded(child: SizedBox()),
+                          Text('Continue',style: appstyle(
+                            15, Colors.white,FontWeight.normal,
+                          )),
+                          const Expanded(child: SizedBox()),
                         ],
                       )),
                 )
